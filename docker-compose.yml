@@ -1,0 +1,48 @@
+services:
+
+  web-api:
+    image: bulat12345/shop_web_api:latest
+    container_name: shop_web_api
+    ports:
+      - "5000:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Host=db;Port=5432;Database=Shop;Username=postgres;Password=12345
+    depends_on:
+      - db
+    networks:
+      - dev
+    restart: always
+
+  frontend:
+      image: bulat12345/shop_frontend:latest 
+      container_name: shop_frontend
+      ports:
+        - "80:80"
+      environment:
+        - REACT_APP_API_URL=http://backend:5000
+      networks:
+      - dev
+      restart: always
+
+  db:
+    image: postgres:latest
+    container_name: shop_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 12345
+      POSTGRES_DB: Shop
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - dev
+    restart: always
+  
+volumes:
+  postgres_data:
+
+networks:
+  dev:
+    driver: bridge
