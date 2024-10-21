@@ -1,2 +1,5 @@
-# Игнорируем файл .env
+# Игнорируем файлы .env
 .env
+.env.backend
+.env.frontend
+.env.db
