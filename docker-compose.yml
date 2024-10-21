@@ -5,9 +5,8 @@ services:
     container_name: shop_web_api
     ports:
       - "5000:8080"
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__DefaultConnection=Host=db;Port=5432;Database=Shop;Username=postgres;Password=12345
+    env_file:
+      - ./env/.env.backend
     depends_on:
       - db
     networks:
@@ -19,8 +18,8 @@ services:
       container_name: shop_frontend
       ports:
         - "80:80"
-      environment:
-        - REACT_APP_API_URL=http://94.159.103.4:5000
+      env_file:
+      - ./env/.env.frontend
       networks:
       - dev
       restart: always
@@ -28,10 +27,8 @@ services:
   db:
     image: postgres:latest
     container_name: shop_db
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 12345
-      POSTGRES_DB: Shop
+    env_file:
+      - ./env/.env.db
     ports:
       - "5432:5432"
     volumes:
