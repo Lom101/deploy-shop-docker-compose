@@ -27,7 +27,7 @@ services:
   db:
     image: postgres:latest
     container_name: shop_db
-	env_file:
+    env_file:
       - ./env/.env.database
     ports:
       - "5432:5432"

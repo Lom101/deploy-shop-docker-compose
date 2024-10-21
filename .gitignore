@@ -1,5 +1,5 @@
-# Игнорируем файлы .env
+# Игнорируем файлы .env и папку env
 .env
 .env.backend
 .env.frontend
-.env.db
+.env.database
