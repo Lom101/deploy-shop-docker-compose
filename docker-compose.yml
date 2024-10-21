@@ -4,7 +4,7 @@ services:
     image: bulat12345/shop_web_api:latest
     container_name: shop_web_api
     ports:
-      - "5000:8080"
+      - "5000:5000"
     env_file:
       - ./env/.env.backend
     depends_on:
