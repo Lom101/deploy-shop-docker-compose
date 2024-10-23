@@ -5,8 +5,20 @@ services:
     container_name: shop_web_api
     ports:
       - "5000:8080"
-    env_file:
-      - ./env/.env.backend
+    environment:
+      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT}
+      - ConnectionStrings__DefaultConnection=${ConnectionStrings__DefaultConnection}
+      - Logging__LogLevel__Default=${Logging__LogLevel__Default}
+      - Logging__LogLevel__Microsoft_AspNetCore=${Logging__LogLevel__Microsoft_AspNetCore}
+      - AllowedHosts=${AllowedHosts}
+      - JwtConfig__Secret=${JwtConfig__Secret}
+      - Stripe__SecretKey=${Stripe__SecretKey}
+      - Stripe__PublishableKey=${Stripe__PublishableKey}
+      - SmtpServerSettings__SmtpServer=${SmtpServerSettings__SmtpServer}
+      - SmtpServerSettings__Port=${SmtpServerSettings__Port}
+      - SmtpServerSettings__Username=${SmtpServerSettings__Username}
+      - SmtpServerSettings__Password=${SmtpServerSettings__Password}
+      - SmtpServerSettings__EnableSsl=${SmtpServerSettings__EnableSsl}
     depends_on:
       - db
     networks:
@@ -18,8 +30,8 @@ services:
       container_name: shop_frontend
       ports:
         - "80:80"
-      env_file:
-      - ./env/.env.frontend
+      environment:
+        - REACT_APP_API_URL=${REACT_APP_API_URL} # this won’t affect anything here,because react is already built, but you can leave it I don’t know why
       networks:
       - dev
       restart: always
@@ -27,8 +39,10 @@ services:
   db:
     image: postgres:latest
     container_name: shop_db
-    env_file:
-      - ./env/.env.database
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     ports:
       - "5432:5432"
     volumes:
