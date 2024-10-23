@@ -31,7 +31,10 @@ services:
       ports:
         - "80:80"
       environment:
-        - REACT_APP_API_URL=${REACT_APP_API_URL} # this won’t affect anything here,because react is already built, but you can leave it I don’t know why
+      # Передача переменных окружения в контейнер(необязательно так как на этапе сборки уже переданы)
+      - REACT_APP_API_URL=${REACT_APP_API_URL}  
+      - REACT_APP_STRIPE_PUBLIC_KEY=${REACT_APP_STRIPE_PUBLIC_KEY}
+      - REACT_APP_YANDEX_API_KEY=${REACT_APP_YANDEX_API_KEY}
       networks:
       - dev
       restart: always
