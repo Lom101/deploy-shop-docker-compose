@@ -3,7 +3,7 @@
 ## Описание
 
 Этот репозиторий предназначен для запуска приложения "Shop" с помощью Docker Compose на production. Docker compose вытягивает образы из Docker Hub, для возможности изменить, просмотреть код используйте другой репозиторий: 
-- `https://github.com/Lom101/localhost-shop-docker-compose`
+- https://github.com/Lom101/deploy-shop-docker-compose.git
 
 ## Структура проекта
 
